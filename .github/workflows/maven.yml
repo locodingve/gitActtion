@@ -30,3 +30,16 @@ jobs:
         docker build -t slam-test . 
         docker tag slam-test slamserver/slam-test:${GITHUB_SHA::7} 
         docker push slamserver/slam-test:${GITHUB_SHA::7}
+    - name: Deploy 
+      uses: appleboy/ssh-action@master 
+      with: 
+        host: ip-172-31-37-42.ap-northeast-2.compute.internal 
+        username: ubuntu 
+        key: ${{ secrets.PRIVATE }} 
+        envs: GITHUB_SHA 
+        script: | 
+          docker pull slamserver/slam-test:${GITHUB_SHA::7} 
+          docker tag slamserver/slam-test:${GITHUB_SHA::7} spring-cicd 
+          docker stop server 
+          docker run -d --rm --name server -p 8080:8080 slam-test
+
