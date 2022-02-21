@@ -39,7 +39,7 @@ jobs:
         envs: GITHUB_SHA 
         script: | 
           docker pull slamserver/slam-test:${GITHUB_SHA::7} 
-          docker tag slamserver/slam-test:${GITHUB_SHA::7} spring-cicd 
+          docker tag slamserver/slam-test:${GITHUB_SHA::7} slam-test
           docker stop server 
           docker run -d --rm --name server -p 8080:8080 slam-test
 
