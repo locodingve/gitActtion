@@ -26,4 +26,7 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Docker Build
       run : |
-        docker build -t slam-test .
+        docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }} 
+        docker build -t slam-test . 
+        docker tag slam-test slamserver/slam-test:${GITHUB_SHA::7} 
+        docker push slamserver/slam-test:${GITHUB_SHA::7}
