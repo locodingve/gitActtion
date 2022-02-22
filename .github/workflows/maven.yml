@@ -49,9 +49,9 @@ jobs:
         key: ${{ secrets.PRIVATE }} 
         envs: GITHUB_SHA 
         script: | 
-          docker pull slamserver/slam-test:${GITHUB_SHA::7} 
-          docker tag slamserver/slam-test:${GITHUB_SHA::7} slam-test
-          docker stop server 
-          docker run -d --rm --name server -p 8080:8080 slam-test
+          sudo docker pull slamserver/slam-test:${GITHUB_SHA::7} 
+          sudo docker tag slamserver/slam-test:${GITHUB_SHA::7} slam-test
+          sudo docker stop server 
+          sudo docker run -d --rm --name server -p 8080:8080 slam-test
     
 
