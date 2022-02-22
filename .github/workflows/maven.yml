@@ -33,13 +33,13 @@ jobs:
     - name: Deploy 
       uses: appleboy/ssh-action@master 
       with: 
-        host: ip-172-31-37-42.ap-northeast-2.compute.internal 
+        host: ec2-3-35-209-190.ap-northeast-2.compute.amazonaws.com
         username: ubuntu 
         key: ${{ secrets.PRIVATE }} 
         envs: GITHUB_SHA 
         script: | 
-          sudo docker pull slamserver/slam-test:${GITHUB_SHA::7} 
-          sudo docker tag slamserver/slam-test:${GITHUB_SHA::7} slam-test
-          sudo docker stop server 
-          sudo docker run -d --rm --name server -p 8080:8080 slam-test
+          docker pull slamserver/slam-test:${GITHUB_SHA::7} 
+          docker tag slamserver/slam-test:${GITHUB_SHA::7} slam-test
+          docker stop server 
+          docker run -d --rm --name server -p 8080:8080 slam-test
 
