@@ -51,7 +51,7 @@ jobs:
         script: | 
           sudo docker pull slamserver/slam-test:${GITHUB_SHA::7} 
           sudo docker tag slamserver/slam-test:${GITHUB_SHA::7} slam-test
-          docker service update slam-test --image slam-test:${GITHUB_SHA::7} --force
+          sudo docker service update slam-test --image slam-test:${GITHUB_SHA::7} --force
           #sudo docker stop server 
           #sudo docker run -d --rm --name server -p 8080:8080 slam-test
     
